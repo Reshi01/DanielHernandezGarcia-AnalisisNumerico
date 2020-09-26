@@ -224,5 +224,5 @@ laguerreC <- function(coeficientes,x0,tol,maxiter){
 #print(newtonHorner(c(mpfr(-250,128),mpfr(155,128),mpfr(-9,128),mpfr(-5,128),mpfr(1,128)), 0, 1e-32, 50))
 #print(laguerre(c(mpfr(-250,128),mpfr(155,128),mpfr(-9,128),mpfr(-5,128),mpfr(1,128)), 0, 1e-32, 50))
 #print(newtonHornerC(c(1,2,3,4,5), 5+1i, 1e-32, 1000))
-print(laguerreC(c(1,2,3,4,5), 5+1i, 1e-32, 50))
+#print(laguerreC(c(1,2,3,4,5), 5+1i, 1e-32, 50))
 
