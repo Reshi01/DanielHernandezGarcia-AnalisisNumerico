@@ -1,5 +1,6 @@
 library(polynom)
 library(ggplot2)
+library(Rmpfr)
 
 #Ejercicio 1
 
@@ -32,20 +33,23 @@ plot(p3)
 points(x,y, col="red")
 
 #Calcular derivada
-
-
+e<-expression(10+x+9.75*x^2-5.75*x^3)
+ed <- D(e,'x')
+gd <- function(x) eval(ed)
+print("Derivada en 0")
+print(gd(0))
 #Ejercicio 10
 
 #Función que interpola x=a a través de Lagrange Modificado
 lagmod <- function(x,y,a){
   n = length(x)
-  fi = 1
+  fi = mpfr(1,128)
   for(i in 1:n){
     fi = fi * (a-x[i])
   }
-  p = 0
+  p =mpfr(0,128)
   for(i in 1:n){
-    w = 1
+    w = mpfr(1,128)
     for(j in 1:n){
       if(i!=j){
         w = w*(1/(x[i]-x[j]))
@@ -65,10 +69,10 @@ print(lagmod(x, y, 0.35))
 #Función que interpola x=a a través de Lagrange Baricéntrico
 lagbar <- function(x,y,a){
   n = length(x)
-  numerador = 0
-  denominador = 0
+  numerador = mpfr(0,128)
+  denominador = mpfr(0,128)
   for(i in 1:n){
-    w = 1
+    w = mpfr(1,128)
     for(j in 1:n){
       if(i!=j){
         w = w*(1/(x[i]-x[j]))
