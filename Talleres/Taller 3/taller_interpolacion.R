@@ -17,8 +17,9 @@ interpolar <- function(x,y,pendiente){
   return(p)
 }
 
-x=c(0,0,1,2)
-y=c(10,1,15,5)
+x=c(0,1,2)
+y=c(10,15,5)
+
 p2 = poly.calc(x,y)
 print("Polinomio de grado 2.")
 print(p2)
@@ -30,13 +31,6 @@ print("Polinomio de grado 3.")
 print(p3)
 plot(p3)
 points(x,y, col="red")
-
-#Utilizando diferencias divididas
-x=c(0,0,1,2)
-y=c(10,1,15,5)
-p = newtonInterp(x,y)
-print("Polinomio grado 3 con diferencias divididas.")
-print(p)
 
 #Calcular derivada
 e<-expression(10+x+9.75*x^2-5.75*x^3)
