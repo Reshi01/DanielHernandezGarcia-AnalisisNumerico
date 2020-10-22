@@ -5,7 +5,7 @@ library(Rmpfr)
 #Ejercicio 1
 
 #Conociendo la pendiente en el primer punto se, obtiene un punto antes del primero
-#para aumentar el grado del polinomio de interpolación. Utiliza interpolación de Lagrange.
+#para aumentar el grado del polinomio de interpolaci???n. Utiliza interpolaci???n de Lagrange.
 
 interpolar <- function(x,y,pendiente){
   deltaX = 1e-8
@@ -38,13 +38,17 @@ ed <- D(e,'x')
 gd <- function(x) eval(ed)
 print("Derivada en 0")
 print(gd(0))
+
 #Ejercicio 10
 
-#Función que interpola x=a a través de Lagrange Modificado
+#Funci???n que interpola x=a a trav???s de Lagrange Modificado
 lagmod <- function(x,y,a){
   n = length(x)
   fi = mpfr(1,128)
   for(i in 1:n){
+    if(a == x[i]){
+      return (y[i])
+    }
     fi = fi * (a-x[i])
   }
   p =mpfr(0,128)
@@ -66,7 +70,7 @@ y = c(1.2, 5.3, 9.4, 10.5)
 print("Resultado con Lagrange Modificado")
 print(lagmod(x, y, 0.35))
 
-#Función que interpola x=a a través de Lagrange Baricéntrico
+#Funci???n que interpola x=a a trav???s de Lagrange Baric???ntrico
 lagbar <- function(x,y,a){
   n = length(x)
   numerador = mpfr(0,128)
@@ -78,6 +82,9 @@ lagbar <- function(x,y,a){
         w = w*(1/(x[i]-x[j]))
       }
     }
+    if(a == x[i]){
+      return (y[i])
+    }
     numerador = numerador + (w/(a-x[i]))*y[i]
     denominador = denominador + w/(a-x[i])
   }
@@ -87,4 +94,4 @@ lagbar <- function(x,y,a){
 x = c(0.2, 0.3, 0.4, 0.5)
 y = c(1.2, 5.3, 9.4, 10.5)
 print("Resultado con Lagrange Baricentrico")
-print(lagmod(x, y, 0.35))
+print(lagbar(x, y, 0.35))
