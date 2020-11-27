@@ -1,18 +1,14 @@
+#Santiago Caroprese, Daniel Hernandez y Juan Carlos Suarez
 library("deSolve")
-library("features")
 library("Rmpfr")
 library(pracma)
 library(raster)
-#library("tseriesChaos")
-#library("nonlinearTseries")
 
 pathFinder <- function(Time, State, Pars) {
   with(as.list(c(State, Pars)), {
     #H = (x-xgoal)^2 + (y-ygoal)^2 + 10/(((1/c)*(x-xhazard))^2 + ((1/c)*(y-yhazard))^2 + 1/f)
     dx = -2*(-xgoal + x) + (20*(-xhazard + x))/(c^2*(f^(-1) + (-xhazard + x)^2/c^2 + (-yhazard + y)^2/c^2)^2)
     dy = -2*(-ygoal + y) + (20*(-yhazard + y))/(c^2*(f^(-1) + (-xhazard + x)^2/c^2 + (-yhazard + y)^2/c^2)^2)
-    #dx = -2*x
-    #dy = -2*y
     return(list(c(dx, dy)))
   })
 }
@@ -26,8 +22,6 @@ yh = 7
 c = 10
 f = 30
 
-
-
 pars  <- c(xgoal = xg,
            ygoal = yg,
            xhazard = xh,
@@ -38,9 +32,7 @@ ini  <- c(x = xi, y = yi)
 times <- seq(0, 20, by = 0.1)
 out   <- ode(ini, times, pathFinder, pars, method = "euler")
 outA   <- ode(ini, times, pathFinder, pars, method = "adams")
-#summary(out)
 
-## Default plot method
 plot(out[,"x"], out[, "y"], "l", xlab="X", ylab="Y")
 
 xs=c(xg,xi,xh)
@@ -90,7 +82,3 @@ set2 <- cbind(c(outA[,"x"][tam]),c(outA[,"y"][tam]))
 #cat("Inicio ",set1,"\n")
 #cat("Final ",set2,"\n")
 cat("total ",formatMpfr(mpfr(pointDistance(set1,set2,lonlat=FALSE),128)),"\n")
-
-
-
-print(features(out[,"x"], out[, "y"],smoother=c("glkerns", "smooth.spline")))
